@@ -1,6 +1,7 @@
 import bs4
 from urllib.request import urlopen as urlreq
 from bs4 import BeautifulSoup as soup
+import os
 
 my_url = 'http://www.montgomeryschoolsmd.org/directory/directory_Boxschool.aspx?processlevel=04757'
 school_name = 'Montgomery_Blair'
@@ -24,8 +25,15 @@ page_soup = soup(page_html, "html.parser")
 #Finds section with teacher information on the page. stores in variable.
 teachers = page_soup.find_all("ul", "box-one-light")
 
-filename = str(school_name)+ "_Teachers.csv"
-f = open(filename, "w")
+filedir = 'school_files' #name of folder
+
+if not os.path.exists(filedir):
+	os.makedirs(filedir)
+
+filename = str(school_name)+ "_Teachers.csv" #name of file
+complete_name = os.path.join(filedir, filename) #save location.
+
+f = open(complete_name, "w")
 
 
 headers = "school, teacher_name, title, email"
@@ -48,5 +56,6 @@ for teacher in teachers:
 	# print(email)
 
 	f.write("\n" + school + "," + teacher_name + "," + title.replace(',',' ') + "," + email)
+
 
 f.close()

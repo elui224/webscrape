@@ -1,40 +1,52 @@
 import bs4
-from urllib.request import urlopen as uReq
+from urllib.request import urlopen as urlreq
 from bs4 import BeautifulSoup as soup
 
 my_url = 'http://www.montgomeryschoolsmd.org/directory/directory_Boxschool.aspx?processlevel=04757'
+school_name = 'Montgomery_Blair'
+
 
 #Open connection, download page.
-uClient = uReq(my_url)
+#or uClient = urllib.request.urlopen(my_url)
+urlclient = urlreq(my_url)
 
 #puts content into a variable.
-page_html = uClient.read()
+page_html = urlclient.read()
 
 #close connection.
-uClient.close()
+urlclient.close()
 
 #stores page HTML into variable. HTML parse.
 page_soup = soup(page_html, "html.parser")
 
-#gets HTML elements h3 on url.
-#page_soup.h3
+# container = page_soup.find(id="ctl00_ContentPlaceHolder1_pnlStructure")
 
 #Finds section with teacher information on the page. stores in variable.
-teachers = page_soup.findAll("div", {"id": "ctl00_ContentPlaceHolder1_pnlStructure"})
+teachers = page_soup.find_all("ul", "box-one-light")
 
-#Finds teacher name and phone number.
-name = teachers.findAll("ul", {"class": "box-one-light"})
+filename = str(school_name)+ "_Teachers.csv"
+f = open(filename, "w")
 
-# filename = "teachers.csv"
-# f = open(filename, "w")
-# headers = "h1, h2, h3"
 
-# f.write(headers)
+headers = "school, teacher_name, title, email"
+
+f.write(headers)
 
 for teacher in teachers:
-	name = name.
+	school = school_name.replace('_', ' ')
 
+	teacher_name = teacher.li.h3.string.replace(u'\xa0', u' ').split(',') #puts name in comma separated list.
+	teacher_name.reverse() #reverses order of the list. [jones, mike] --> [mike, jones]
+	teacher_name = ' '.join(teacher_name).rsplit('.', 1)[-1].strip() #converts list to Mike Jones. Trims white space.
 
-	# f.write() #writes headers.
+	title = teacher.find_all('p')[0].getText()
+	email = teacher.find_all('p')[1].getText()
 
-# f.close()
+	# print(school)
+	# print(teacher_name)
+	# print(title)
+	# print(email)
+
+	f.write("\n" + school + "," + teacher_name + "," + title.replace(',',' ') + "," + email)
+
+f.close()

@@ -3,16 +3,15 @@ import bs4
 from urllib.request import urlopen as urlreq
 from bs4 import BeautifulSoup as soup
 
-root_url = 'http://www.montgomeryschoolsmd.org/directory/'
+'''
+The function returns a list of tuples contained in all_schools.
+For example, each tuple is (school name, url)
+'''
 
-#example
-# school_url = 'directory_Boxschool.aspx?processlevel=02790'
-# full_school_directory = 'http://www.montgomeryschoolsmd.org/directory/schools.aspx'
-
+root_url = 'http://www.montgomeryschoolsmd.org/directory/' #root link that all school links begin with. Used to concatenate.
 all_schools = [] #Will be a list of tuples (school name, school's URL)
 
 def getSchools(url):
-
 	try:
 		urlclient = urlreq(url)
 		page_html = urlclient.read()
@@ -38,6 +37,3 @@ def getSchools(url):
 				# print(all_schools)
 	return all_schools
 	
-# getSchools(full_school_directory)
-# school_list = [ seq[0] for seq in all_schools ]
-# url_list = [ seq[1] for seq in all_schools ]

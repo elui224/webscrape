@@ -5,16 +5,9 @@ import os
 
 
 '''
-ReadMe:
-Define URL, file directory, and school name here.
-The script should be run once for each school.
+The functions contain the logic that needs
+to be run once for each school.
 '''
-# my_url = 'http://www.montgomeryschoolsmd.org/directory/directory_Boxschool.aspx?processlevel=04757'
-filedir = 'school_files' #name of folder to save files
-element = "ul" 
-element_name = "box-one-light"
-# root_url = 'http://www.montgomeryschoolsmd.org/directory/directory_Boxschool.aspx?processlevel='
-# school_url = 'http://www.montgomeryschoolsmd.org/directory/schools.aspx'
 
 def get_soup_object(my_url):
 	'''
@@ -22,12 +15,17 @@ def get_soup_object(my_url):
 	Need to figure out a way to iterate 
 	through multiple url patterns.
 	'''
-	#or uClient = urllib.request.urlopen(my_url)
-	urlclient = urlreq(my_url)
-	page_html = urlclient.read()
-	urlclient.close()
+	element = "ul" 
+	element_name = "box-one-light" #class name that holds teacher's information (name, title, email)
+	try:
+		#or uClient = urllib.request.urlopen(my_url)
+		urlclient = urlreq(my_url)
+		page_html = urlclient.read()
+		urlclient.close()
+	except Exception as e: 
+		print(e.message)
+		return #If url does not exist, it skips and continues with the program.	
 
-	#stores page HTML into variable. HTML parse.
 	page_soup = soup(page_html, "html.parser").find_all(element, element_name) #This line likely needs to change based on website HTML.
 	return page_soup
 

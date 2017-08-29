@@ -55,20 +55,4 @@ def logic_school(school_name, teacher):
 	return school, teacher_name, title, email, concat_name
 
 
-# def scrape():
-# 	f = open(make_directory(), "w")
-# 	headers = "school, teacher_name, title, email, upd_dt, concat_name"
-# 	f.write(headers)
-	
-# 	teachers = get_soup_object() #Finds section with teacher information on the page. stores in variable.
-
-# 	for teacher in teachers:
-		
-# 		school, teacher_name, title, email, concat_name = logic_school(teacher) #Need to change the function
-
-# 		f.write("\n" + school + "," + teacher_name + "," + title.replace(',',' ') + "," + email + "," + time.strftime("%m/%d/%Y") + "," + concat_name)
-
-# 	f.close()
-
-# scrape()
 

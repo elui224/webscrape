@@ -1,8 +1,11 @@
 import pymysql
 import csv
 import os
+import time
 from entirewebscrape import filedir
 
+start_time = time.time()
+print("Inserting records into database.")
 conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='thel123', db='teachers')
 cursor = conn.cursor() 
 
@@ -12,6 +15,7 @@ list_sch_files = os.listdir(os.path.join(os.path.abspath('.'), filedir)) #puts a
 for csvfile in list_sch_files:
 	if csvfile.endswith('.csv'):
 		complete_name = os.path.join(basedir, csvfile)
+		print(complete_name)
 		with open(complete_name, 'r') as csviterate:
 			reader = csv.reader(csviterate, delimiter=',')
 			next(reader) #skips header.
@@ -23,3 +27,5 @@ for csvfile in list_sch_files:
 conn.commit()
 cursor.close()
 
+print("Done!")
+print("--- %s seconds ---" % round(time.time() - start_time, 2) )

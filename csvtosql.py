@@ -6,7 +6,7 @@ from entirewebscrape import filedir
 
 start_time = time.time()
 print("Inserting records into database.")
-conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='thel123', db='teachers')
+conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='thel123', db='teachers') #mySQL DB conneciton object.
 cursor = conn.cursor() 
 
 basedir = os.path.join(os.path.abspath('.'), filedir) #/Users/ericlui/Documents/webscrape/school_files

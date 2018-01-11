@@ -6,5 +6,5 @@ An additional script, csvtosql.py, inserts the information in the .csv files int
 
 # Steps
 1. A list of tuples is created. Each item of the list represents a school and its website URL. The file is directory.py.
-2. The process to scrape one website URL is contained in webscrape.py.
+2. The process scrapes one website URL, which is contained in webscrape.py, to get name and email information.
 3. The file entirewebscrape.py puts these steps together.

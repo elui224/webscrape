@@ -2,7 +2,7 @@
 '''
 The script combines functions from webscrape.py and
 directory.py to scrape information in all the links 
-in the school directory.
+in the school directory. This is the main file to run the scrape.
 '''
 
 filedir = 'school_files' #name of folder to save files

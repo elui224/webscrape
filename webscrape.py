@@ -7,6 +7,9 @@ import os
 '''
 The functions contain the logic that needs
 to be run once for each school.
+Each iteration of this set of functions creates
+BS object for each school, grabs the school staff info,
+puts school staff info into a csv file.
 '''
 
 def get_soup_object(my_url):
@@ -41,7 +44,8 @@ def make_directory(filedir, school_name):
 
 def logic_school(school_name, teacher):
 	'''
-	Each school will need different logic.
+	This formats the teacher names at a given school
+	to print out nicely in csv file.
 	'''	
 	school = school_name.replace('_', ' ')
 
